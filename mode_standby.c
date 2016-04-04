@@ -18,29 +18,21 @@ void Mode_Standby_Init(void) {
 	Hardware_ClearAllFlags();
 	Joystick_ClearAllFlags();
 	Zigbee_ClearAllFlags();
-	DisplayGUI_Mode(1);
+	DisplayGUI_Mode(MODE_STANDBY);
     DisplayGUI_BatteryLevel (86);
     DisplayGUI_SignalLevel (92);
     DisplayGUI_Standby_UpdateQuadFound();
 }
 
-uint8_t Mode_Standby_Run(void) {
-	uint8_t next_mode = MODE_STANDBY;
-	/* Check for drone mode to switch to AlexKidd */
-	if (Zigbee_GetDroneModeFlag()) {
-		switch (Zigbee_GetDroneMode()) {
-		case DRONE_MODE_ALEXKIDD:
-			next_mode = MODE_ALEXKIDD;
-			break;
-		default:
-			break;
-		}
+void Mode_Standby_Run(void) {
+	/* Check for request to unarm drone (just in case of) */
+	if (Hardware_GetLeftClickFlag()) {
+		Zigbee_SendCommand(RC_COMMAND_UNARM);
 	}
 	/* Check for request to switch to AlexKidd */
-	if (Hardware_GetRightClickFlag()) {
+	else if (Hardware_GetRightClickFlag()) {
 		Zigbee_SendCommand(RC_COMMAND_ALEXKIDD);
 	}
-	return next_mode;
 }
 
 /* [] END OF FILE */

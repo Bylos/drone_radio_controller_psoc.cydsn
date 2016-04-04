@@ -17,7 +17,7 @@
 	#include "main.h"
 	
 	void Mode_AlexKidd_Init(void);
-	uint8_t Mode_AlexKidd_Run(void);
+	void Mode_AlexKidd_Run(void);
 	
 	#endif /* __MODE_ALEXKIDD_H__ */
 

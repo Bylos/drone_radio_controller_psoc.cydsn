@@ -25,21 +25,24 @@
 	#include "mode_seeking.h"
 	#include "mode_standby.h"
 	#include "mode_alexkidd.h"
+    #include "mode_armed_generic.h"
 	
-	/* Controller Modes */
+	/* Controller & Quadcopter Modes */
 	enum mode_t {
-		MODE_BOOT 			= 0,
-		MODE_SEEKING		= 1,
-		MODE_STANDBY		= 2,
-		MODE_ALEXKIDD		= 3,
+		MODE_BOOT 			= 254,
+		MODE_SEEKING		= 255,
+		MODE_STANDBY		= 0,
+		MODE_ALEXKIDD 	    = 1,
+		MODE_ACC_CAL		= 2,
+		MODE_GYR_CAL		= 3,
+		MODE_MAG_CAL		= 4,
+		MODE_ALEXKIDD2	    = 5,
+		MODE_ACRO			= 6,
+		MODE_STABILIZED 	= 7
 	};
 
-	/* Quadcopter Modes */
-	enum drone_mode_t {
-		DRONE_MODE_UNARMED	= 0,
-		DRONE_MODE_ALEXKIDD = 1,
-	};
-	
+	#define DRONE_MODE_NUM		8
+    
 	#endif // __MAIN_H__
 
 /* [] END OF FILE */

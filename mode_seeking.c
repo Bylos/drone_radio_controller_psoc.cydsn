@@ -18,26 +18,13 @@ void Mode_Seeking_Init(void) {
 	Joystick_ClearAllFlags();
 	Zigbee_ClearAllFlags();
 	Display_FillScreen(ILI9341_BLACK);
-	DisplayGUI_Mode(0);
+	DisplayGUI_Mode(MODE_SEEKING);
     DisplayGUI_BatteryLevel (200);
     DisplayGUI_SignalLevel (200);
     DisplayGUI_Standby();
 }
 
-uint8_t Mode_Seeking_Run(void) {
-	uint8_t next_mode = MODE_SEEKING;
-	/* If drone is detected in different mode, resquest unarmed */
-	if (Zigbee_GetDroneModeFlag()) {
-		switch (Zigbee_GetDroneMode()) {
-		case DRONE_MODE_UNARMED:
-			next_mode = MODE_STANDBY;
-			break;
-		default:
-			Zigbee_SendCommand(RC_COMMAND_UNARM);
-			break;
-		}
-	}
-	return next_mode;
+void Mode_Seeking_Run(void) {
 }
 
 /* [] END OF FILE */

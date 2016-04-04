@@ -37,6 +37,11 @@ int main()
 			next_mode = MODE_SEEKING;
 		}
 		
+        /* Check for new drone mode */
+        if (Zigbee_GetDroneModeFlag()) {
+        	next_mode = Zigbee_GetDroneMode();
+        }
+    
 		if (mode != next_mode) {
 			switch (next_mode) {
 			case MODE_SEEKING:
@@ -48,6 +53,14 @@ int main()
 			case MODE_ALEXKIDD:
 				Mode_AlexKidd_Init();
 				break;
+            case MODE_ACC_CAL:
+            case MODE_GYR_CAL:
+            case MODE_MAG_CAL:
+            case MODE_ALEXKIDD2:
+            case MODE_ACRO:
+            case MODE_STABILIZED:
+                Mode_Armed_Generic_Init(next_mode);
+                break;
 			default:
 				break;
 			}
@@ -56,13 +69,22 @@ int main()
 		
 		switch(mode) {
 		case MODE_SEEKING:
-			next_mode = Mode_Seeking_Run();
+			Mode_Seeking_Run();
 			break;
 		case MODE_STANDBY:
-			next_mode = Mode_Standby_Run();
+			Mode_Standby_Run();
 			break;
 		case MODE_ALEXKIDD:
-			next_mode = Mode_AlexKidd_Run();
+			Mode_AlexKidd_Run();
+            break;
+        case MODE_ACC_CAL:
+        case MODE_GYR_CAL:
+        case MODE_MAG_CAL:
+        case MODE_ALEXKIDD2:
+        case MODE_ACRO:
+        case MODE_STABILIZED:
+            Mode_Armed_Generic_Run();
+            break;
 		default:
 			break;
 		}

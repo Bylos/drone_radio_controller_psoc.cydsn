@@ -17,7 +17,7 @@
 	#include "main.h"
 	
 	void Mode_Seeking_Init(void);
-	uint8_t Mode_Seeking_Run(void);
+	void Mode_Seeking_Run(void);
 	
 	#endif /* __MODE_SEEKING_H__ */
 

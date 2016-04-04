@@ -17,7 +17,7 @@
 	#include "main.h"
 	
 	void Mode_Standby_Init(void);
-	uint8_t Mode_Standby_Run(void);
+	void Mode_Standby_Run(void);
 	
 	#endif /* __MODE_STANDBY_H__ */
 
