@@ -23,7 +23,7 @@ void DisplayGUI_AlexKidd(void) {
   Display_WriteString("LEFT CLICK TO STANDBY", 1, 178, 198, ILI9341_BLUE, ILI9341_BLACK);
 }
 
-void DisplayGUI_AlexKidd_UpdateChosenMode(char* newModeName) {
+void DisplayGUI_AlexKidd_UpdateChosenMode(const char* newModeName) {
     uint16_t i = 0;
     while(newModeName[i] > 0) i++;
     Display_FillRect(239-57+2, 168, 111, 9, ILI9341_WHITE);

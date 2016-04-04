@@ -17,7 +17,7 @@
     
 void DisplayGUI_AlexKidd(void);
 
-void DisplayGUI_AlexKidd_UpdateChosenMode(char* newModeName);
+void DisplayGUI_AlexKidd_UpdateChosenMode(const char* newModeName);
 
 void DisplayGUI_AlexKidd_UpdateMotors(uint8_t m1on, uint8_t m2on, uint8_t m3on, uint8_t m4on);
 

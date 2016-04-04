@@ -1,5 +1,5 @@
 #include "displayGUI_Standby.h"
-
+#include "main.h"
 
 void DisplayGUI_Standby(void) {
 
@@ -12,7 +12,7 @@ void DisplayGUI_Standby(void) {
 }
 
 void DisplayGUI_Standby_UpdateQuadFound(void) {
-  DisplayGUI_Mode(1);
+  DisplayGUI_Mode(MODE_STANDBY);
   DisplayGUI_Quad(90,115);
   Display_FillRect(170, 50, 150, 160, ILI9341_BLACK);
 

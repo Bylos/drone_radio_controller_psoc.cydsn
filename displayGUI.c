@@ -1,19 +1,20 @@
 #include "displayGUI.h"
 #include "stdio.h"
+#include "main.h"
 
 ////////////////////////////////////////////////////////////////
 //           Fonctions d'affichage du drone                   //
 ////////////////////////////////////////////////////////////////
 void DisplayGUI_Mode (uint8_t modeID){
-    if(modeID==0){
+    if(modeID==MODE_SEEKING){
         Display_FillRect(0, 0, 320, 25,ILI9341_GREEN);
         Display_WriteString("MODE: SEEKING ...", 2, 50, 6, ILI9341_BLACK, ILI9341_GREEN);
 	}
-    if(modeID==1){
+    else if(modeID==MODE_STANDBY){
         Display_FillRect(0, 0, 320, 25,ILI9341_GREEN);
         Display_WriteString("MODE: STANDBY", 2, 50, 6, ILI9341_BLACK, ILI9341_GREEN);
 	}
-    if(modeID==2){
+    else if(modeID==MODE_ALEXKIDD){
         Display_FillRect(0, 0, 320, 25,ILI9341_RED);
         Display_FillTriangle (14,3,5,22,23,22, ILI9341_BLACK);
         Display_FillTriangle (14,7,8,20,20,20, ILI9341_RED);
@@ -26,6 +27,20 @@ void DisplayGUI_Mode (uint8_t modeID){
         Display_FillCircle(306, 19, 2, ILI9341_BLACK);
 
         Display_WriteString("MODE: TESTING MOTORS", 2, 41, 6, ILI9341_BLACK, ILI9341_RED);
+	}
+    else {
+        Display_FillRect(0, 0, 320, 25,ILI9341_RED);
+        Display_FillTriangle (14,3,5,22,23,22, ILI9341_BLACK);
+        Display_FillTriangle (14,7,8,20,20,20, ILI9341_RED);
+        Display_FillTriangle (13,11,15,11,14,16, ILI9341_BLACK);
+        Display_FillCircle(14, 19, 2, ILI9341_BLACK);
+
+        Display_FillTriangle (306,3,315,22,297,22, ILI9341_BLACK);
+        Display_FillTriangle (306,7,312,20,300,20, ILI9341_RED);
+        Display_FillTriangle (305,11,307,11,306,16, ILI9341_BLACK);
+        Display_FillCircle(306, 19, 2, ILI9341_BLACK);
+
+        Display_WriteString("MODE: ARMED", 2, 41, 6, ILI9341_BLACK, ILI9341_RED);
 	}
 }
 
