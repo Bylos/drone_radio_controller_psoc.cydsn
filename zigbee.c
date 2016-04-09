@@ -116,20 +116,21 @@ void Zigbee_SendCommand(uint8_t command) {
 }
 
 void Zigbee_SendJoystick(joystick_t joystick) {
-	uint8_t crc;
-	preamble[PREAMBLE_SIZE-1] = sizeof(joystick_t);
-	joystick.left_x &= ~RC_CHANNEL_MASK;
-	joystick.left_x |= RC_JOY_LEFT_X << RC_CHANNEL_SHIFT;
-	joystick.left_y &= ~RC_CHANNEL_MASK;
-	joystick.left_y |= RC_JOY_LEFT_Y << RC_CHANNEL_SHIFT;
-	joystick.right_x &= ~RC_CHANNEL_MASK;
-	joystick.right_x |= RC_JOY_RIGHT_X << RC_CHANNEL_SHIFT;
-	joystick.right_y &= ~RC_CHANNEL_MASK;
-	joystick.right_y |= RC_JOY_RIGHT_Y << RC_CHANNEL_SHIFT;
-	crc = CRC_Fast((uint8_t*)(&joystick), sizeof(joystick_t));
-	UART_PutArray(preamble, PREAMBLE_SIZE);
-	UART_PutArray((uint8_t*)(&joystick), sizeof(joystick_t));
-	UART_PutChar(crc);
+	uint8_t frame[12] = {
+		0xFF, 0xFF, 0x08,
+		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+		0x00};
+	joystick.left_x &= ~(RC_CHANNEL_MASK);
+	joystick.left_x |= (RC_JOY_LEFT_X << RC_CHANNEL_SHIFT);
+	joystick.left_y &= ~(RC_CHANNEL_MASK);
+	joystick.left_y |= (RC_JOY_LEFT_Y << RC_CHANNEL_SHIFT);
+	joystick.right_x &= ~(RC_CHANNEL_MASK);
+	joystick.right_x |= (RC_JOY_RIGHT_X << RC_CHANNEL_SHIFT);
+	joystick.right_y &= ~(RC_CHANNEL_MASK);
+	joystick.right_y |= (RC_JOY_RIGHT_Y << RC_CHANNEL_SHIFT);
+	memcpy(&frame[3], &joystick, 8);
+	frame[11] = CRC_Fast(&frame[3], 8);
+	UART_PutArray(frame, 12);
 }
 
 void Zigbee_SetRssiFlag(void) {
