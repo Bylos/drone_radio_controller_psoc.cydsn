@@ -30,16 +30,25 @@ void readcommand(uint8_t c) {
 	while(TS_SPI_SpiIsBusBusy());
 }
 
+uint8_t is_writing_data = 0;
 void writecommand(uint8_t c)
 {
+	if (is_writing_data) {
+		CyDelayCycles(1);
+		TS_DnC_DR &= ~TS_DnC_MASK;
+		is_writing_data = 0;
+	}
 	TS_SPI_SpiUartWriteTxData(c);
-	TS_DnC_DR &= ~TS_DnC_MASK;
 }
 
 void writedata(uint8_t c)
 {
+	if(!is_writing_data) {
+		CyDelayCycles(1);
+		TS_DnC_DR |= TS_DnC_MASK;
+		is_writing_data = 1;
+	}
 	TS_SPI_SpiUartWriteTxData(c);
-	TS_DnC_DR |= TS_DnC_MASK;
 }
 
 uint16_t Display_Color565(uint8_t r, uint8_t g, uint8_t b) {
@@ -537,6 +546,7 @@ void Display_Init(void) {
 	CyDelay(120);
 	writecommand(ILI9341_DISPON);
 	writecommand(ILI9341_INVON);
+
 	/* Clear screen and set up text */
 	Display_FillScreen(ILI9341_BLACK);
 }
