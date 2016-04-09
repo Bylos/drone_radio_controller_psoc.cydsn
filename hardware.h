@@ -21,6 +21,7 @@
 	
 	#define ADC_PERIOD_MS		50  // Actual Clock is 10kHz/250/2 = 20Hz
 	#define DEBOUNCE_COUNT		5	// Number of ADC cycles to wait for debounce
+	#define XBEE_RSSI_DELAY		20	// Number of ADC cycles to wait for RSSI
 	
 	/* CORRECTED Hardware ADC Channel assignement */
 	enum ADC_channel_t {

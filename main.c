@@ -88,6 +88,11 @@ int main()
 		default:
 			break;
 		}
+		
+		// Update signal strength
+		if (Zigbee_GetRssiFlag()) {
+			DisplayGUI_SignalLevel(Zigbee_GetRssi()*10/408);
+		}
 	}
 }
 

@@ -31,7 +31,7 @@ void Mode_Armed_Generic_Init(uint8_t chosen_mode) {
 	Display_FillScreen(ILI9341_BLACK);
     DisplayGUI_Mode(chosen_mode);
     DisplayGUI_BatteryLevel (100);
-    DisplayGUI_SignalLevel (37);
+    //DisplayGUI_SignalLevel (37);
     DisplayGUI_Armed_Generic();
 	DisplayGUI_Armed_Generic_UpdateChosenMode(ag[chosen_mode]);
 }

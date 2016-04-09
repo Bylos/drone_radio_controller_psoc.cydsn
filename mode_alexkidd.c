@@ -36,7 +36,7 @@ void Mode_AlexKidd_Init(void) {
 	Display_FillScreen(ILI9341_BLACK);
     DisplayGUI_Mode(MODE_ALEXKIDD);
     DisplayGUI_BatteryLevel (100);
-    DisplayGUI_SignalLevel (37);
+    //DisplayGUI_SignalLevel (37);
     DisplayGUI_AlexKidd();
 	DisplayGUI_AlexKidd_UpdateChosenMode(ak[chosen_mode]);
 }

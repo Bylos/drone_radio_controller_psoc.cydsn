@@ -21,6 +21,8 @@ static uint8_t _jl_debounce = 0;
 static uint8_t _jr_sel_flag = 0;
 static uint8_t _jr_debounce = 0;
 
+static uint8_t _xbee_rssi_delay = 0;
+
 static uint8_t _adc_flag = 0;
 
 void Hardware_ClearAllFlags(void) {
@@ -69,9 +71,16 @@ CY_ISR(ADC_Interrupt) {
 	Joystick_SetValues(joystick);
 	Joystick_SetValuesFlag();
 	
-	uint16_t rssi = (uint16_t)(ADC_SAR_Seq_GetResult16(ADC_ZB_RSSI)+2048);
-	Zigbee_SetRssi(rssi);
-	Zigbee_SetRssiFlag();
+	if (!_xbee_rssi_delay) {
+		_xbee_rssi_delay = XBEE_RSSI_DELAY;
+		uint16_t rssi = (uint16_t)((int32_t)ADC_SAR_Seq_GetResult16(ADC_ZB_RSSI)+2048);
+		Zigbee_SetRssi(rssi);
+		Zigbee_SetRssiFlag();
+	}
+	else {
+		_xbee_rssi_delay --;
+	}
+	
 	Zigbee_TimerAdd(ADC_PERIOD_MS);
 	
 	if (_jr_debounce) {

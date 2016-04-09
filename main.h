@@ -27,6 +27,8 @@
 	#include "mode_alexkidd.h"
     #include "mode_armed_generic.h"
 	
+	#include "displayGUI.h"
+	
 	/* Controller & Quadcopter Modes */
 	enum mode_t {
 		MODE_BOOT 			= 254,

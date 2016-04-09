@@ -20,7 +20,7 @@ void Mode_Standby_Init(void) {
 	Zigbee_ClearAllFlags();
 	DisplayGUI_Mode(MODE_STANDBY);
     DisplayGUI_BatteryLevel (86);
-    DisplayGUI_SignalLevel (92);
+    //DisplayGUI_SignalLevel (92);
     DisplayGUI_Standby_UpdateQuadFound();
 }
 
