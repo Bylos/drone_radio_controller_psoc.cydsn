@@ -18,7 +18,7 @@ uint8_t crcTable[256];
 
 void CRC_Init(void) {
 	uint8_t remainder;
-	int dividend;
+	uint16_t dividend;
 	for (dividend = 0; dividend < 256; ++dividend) {
 		remainder = dividend;
 		uint8_t bit;
@@ -36,7 +36,7 @@ void CRC_Init(void) {
 uint8_t CRC_Fast(uint8_t const message[], int nBytes) {
 	uint8_t data;
 	uint8_t remainder = 0;
-	int byte;
+	uint16_t byte;
 	for (byte = 0; byte < nBytes; ++byte) {
 		data = message[byte] ^ remainder;
 		remainder = crcTable[data] ^ (remainder << 8);
