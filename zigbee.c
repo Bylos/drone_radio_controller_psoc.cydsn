@@ -120,15 +120,28 @@ void Zigbee_SendJoystick(joystick_t joystick) {
 		0xFF, 0xFF, 0x08,
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 		0x00};
-	joystick.left_x &= ~(RC_CHANNEL_MASK);
-	joystick.left_x |= (RC_JOY_LEFT_X << RC_CHANNEL_SHIFT);
-	joystick.left_y &= ~(RC_CHANNEL_MASK);
-	joystick.left_y |= (RC_JOY_LEFT_Y << RC_CHANNEL_SHIFT);
-	joystick.right_x &= ~(RC_CHANNEL_MASK);
-	joystick.right_x |= (RC_JOY_RIGHT_X << RC_CHANNEL_SHIFT);
-	joystick.right_y &= ~(RC_CHANNEL_MASK);
-	joystick.right_y |= (RC_JOY_RIGHT_Y << RC_CHANNEL_SHIFT);
-	memcpy(&frame[3], &joystick, 8);
+    control_t control = {0, 0, 0, 0};
+    switch (Joystick_GetMode()) {
+        case MODE_1:
+            control.throttle = (joystick.right_y & ~(RC_CHANNEL_MASK)) | (RC_THROTTLE << RC_CHANNEL_SHIFT);
+            control.yaw      = (joystick.left_x  & ~(RC_CHANNEL_MASK)) | (RC_YAW      << RC_CHANNEL_SHIFT);
+            control.pitch    = (joystick.left_y  & ~(RC_CHANNEL_MASK)) | (RC_PITCH    << RC_CHANNEL_SHIFT);
+            control.roll     = (joystick.right_x & ~(RC_CHANNEL_MASK)) | (RC_ROLL     << RC_CHANNEL_SHIFT);
+        break;
+        case MODE_2:
+            control.throttle = (joystick.left_y  & ~(RC_CHANNEL_MASK)) | (RC_THROTTLE << RC_CHANNEL_SHIFT);
+            control.yaw      = (joystick.left_x  & ~(RC_CHANNEL_MASK)) | (RC_YAW      << RC_CHANNEL_SHIFT);
+            control.pitch    = (joystick.right_y & ~(RC_CHANNEL_MASK)) | (RC_PITCH    << RC_CHANNEL_SHIFT);
+            control.roll     = (joystick.right_x & ~(RC_CHANNEL_MASK)) | (RC_ROLL     << RC_CHANNEL_SHIFT);            
+        break;
+        default: // default is MODE_1
+            control.throttle = (joystick.right_y & ~(RC_CHANNEL_MASK)) | (RC_THROTTLE << RC_CHANNEL_SHIFT);
+            control.yaw      = (joystick.left_x  & ~(RC_CHANNEL_MASK)) | (RC_YAW      << RC_CHANNEL_SHIFT);
+            control.pitch    = (joystick.left_y  & ~(RC_CHANNEL_MASK)) | (RC_PITCH    << RC_CHANNEL_SHIFT);
+            control.roll     = (joystick.right_x & ~(RC_CHANNEL_MASK)) | (RC_ROLL     << RC_CHANNEL_SHIFT);
+        break;
+    }
+	memcpy(&frame[3], &control, 8);
 	frame[11] = CRC_Fast(&frame[3], 8);
 	UART_PutArray(frame, 12);
 }

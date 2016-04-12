@@ -35,10 +35,10 @@
 	/* Software RC Channel assignement */
 	enum RC_channel_t {
 		RC_JOY_LEFT_SEL     = 0, // would be emergency exit
-		RC_JOY_RIGHT_Y      = 1, // would be throttle
-		RC_JOY_RIGHT_X      = 2, // would be yaw
-		RC_JOY_LEFT_Y       = 3, // would be pitch
-		RC_JOY_LEFT_X       = 4, // would be roll
+		RC_THROTTLE         = 1, // would be throttle
+		RC_ROLL             = 2, // would be roll
+		RC_PITCH            = 3, // would be pitch
+		RC_YAW              = 4, // would be yaw
 		RC_JOY_RIGHT_SEL    = 5, // would be arming
 	};
 	

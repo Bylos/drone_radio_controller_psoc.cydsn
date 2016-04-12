@@ -18,10 +18,9 @@ void Mode_Seeking_Init(void) {
 	Joystick_ClearAllFlags();
 	Zigbee_ClearAllFlags();
 	Display_FillScreen(ILI9341_BLACK);
+    DisplayGUI_Seeking();
 	DisplayGUI_Mode(MODE_SEEKING);
     DisplayGUI_BatteryLevel (200);
-    DisplayGUI_SignalLevel (200);
-    DisplayGUI_Standby();
 }
 
 void Mode_Seeking_Run(void) {

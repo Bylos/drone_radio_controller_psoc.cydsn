@@ -17,6 +17,7 @@
 	#include "joystick.h"
 	#include "zigbee.h"
 	#include "display.h"
+    #include "touch.h"
 	#include "crc.h"
 	
 	#define ADC_PERIOD_MS		50  // Actual Clock is 10kHz/250/2 = 20Hz

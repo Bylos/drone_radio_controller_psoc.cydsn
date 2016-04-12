@@ -14,6 +14,15 @@
 
 static uint8_t _joystick_flag = 0;
 static joystick_t _joystick = {0, 0, 0, 0};
+static uint8_t _mode = MODE_1;
+
+void Joystick_SetMode(uint8_t mode) {
+    _mode = mode;
+}
+
+uint8_t Joystick_GetMode(void) {
+    return _mode;
+}
 
 void Joystick_ClearAllFlags(void) {
 	_joystick_flag = 0;

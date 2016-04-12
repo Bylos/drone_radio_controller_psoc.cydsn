@@ -18,10 +18,10 @@ void Mode_Standby_Init(void) {
 	Hardware_ClearAllFlags();
 	Joystick_ClearAllFlags();
 	Zigbee_ClearAllFlags();
+    DisplayGUI_Standby();
 	DisplayGUI_Mode(MODE_STANDBY);
     DisplayGUI_BatteryLevel (86);
-    //DisplayGUI_SignalLevel (92);
-    DisplayGUI_Standby_UpdateQuadFound();
+    DisplayGUI_ControlMode();
 }
 
 void Mode_Standby_Run(void) {
@@ -33,6 +33,21 @@ void Mode_Standby_Run(void) {
 	else if (Hardware_GetRightClickFlag()) {
 		Zigbee_SendCommand(RC_COMMAND_ALEXKIDD);
 	}
+    /* Check for tactile screen input */
+    if (Touch_IsTouched()) {
+        point_t point = Touch_GetPoint();
+        
+        if (point.x > 15 && point.x < 100) {
+            if (point.y > 25 && point.y < 77) {
+                Joystick_SetMode(MODE_1);
+                DisplayGUI_ControlMode();
+            }
+            else if (point.y > 78 && point.y < 117) {
+                Joystick_SetMode(MODE_2);
+                DisplayGUI_ControlMode();
+            }
+        }
+    }
 }
 
 /* [] END OF FILE */

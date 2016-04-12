@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////////////////
 //           Fonctions d'affichage du drone                   //
 ////////////////////////////////////////////////////////////////
+// ZONE 0;0 to 320;25
 void DisplayGUI_Mode (uint8_t modeID){
     if(modeID==MODE_SEEKING){
         Display_FillRect(0, 0, 320, 25,ILI9341_GREEN);
@@ -46,7 +47,7 @@ void DisplayGUI_Mode (uint8_t modeID){
 
 
 
-
+// ZONE 0;215 to 159;240
 void DisplayGUI_BatteryLevel (uint8_t battLevelPercent){
     char buff[50];
     sprintf(buff,"BATTERY %3d%%",battLevelPercent);
@@ -74,7 +75,7 @@ void DisplayGUI_BatteryLevel (uint8_t battLevelPercent){
 }
 
 
-
+//ZONE 160;215 to 320;240
 void DisplayGUI_SignalLevel (uint8_t signalLevelPercent){
     char buffer[50];
     sprintf(buffer,"SIGNAL %3d%%",signalLevelPercent);

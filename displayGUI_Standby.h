@@ -15,10 +15,10 @@
 
 #include "displayGUI.h"
     
+void DisplayGUI_Seeking(void);
+
 void DisplayGUI_Standby(void);
 
-void DisplayGUI_Standby_UpdateQuadFound(void);
-
-void DisplayGUI_Standby_UpdateQuadLost(void);
+void DisplayGUI_ControlMode(void);
 
 #endif // __DISPGUISB_H__

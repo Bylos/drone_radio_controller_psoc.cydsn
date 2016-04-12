@@ -73,7 +73,7 @@ void readData(point_t* p) {
 		touchY[i] |= i2cdat[0x06 + i*6];
 		touchID[i] = i2cdat[0x05 + i*6] >> 4;
 	}
-	p->x = touchX[0]; p->y = touchY[0];
+	p->x = touchY[0]; p->y = 240-touchX[0];
 }
 
 point_t Touch_GetPoint(void) {

@@ -106,14 +106,16 @@ uint8_t Hardware_GetAdcFlag(void) {
 *******************************************************************************/
 void Hardware_Init() {
 	/* Initialize User Modules */
-	CRC_Init();
 	ADC_SAR_Seq_Start();
 	TS_SPI_Start();
 	TS_I2C_Start();
 	UART_Start();
 	
-	/* Screen Init Sequence */
+    /* Initialize Libraries */
+	CRC_Init();
+    Joystick_SetMode(MODE_1);
 	Display_Init();
+    Touch_Begin(FT6206_DEFAULT_THRESSHOLD);
 	
 	/* Clear Transmission Buffers */
 	UART_ClearRxBuffer();

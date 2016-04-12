@@ -13,6 +13,9 @@
 #ifndef __JOYSTICK_H__
 	#define __JOYSTICK_H__
 	    
+    #define MODE_1          0x01
+    #define MODE_2          0x02
+    
 	#include <project.h>
 
 	typedef struct {
@@ -22,6 +25,15 @@
 		int16 left_x;
 	} joystick_t;
 	
+    typedef struct {
+        int16 throttle;
+        int16 roll;
+        int16 pitch;
+        int16 yaw;
+    } control_t;
+    
+    void Joystick_SetMode(uint8_t mode);
+    uint8_t Joystick_GetMode(void);
 	void Joystick_SetValuesFlag(void);
 	uint8_t Joystick_GetValuesFlag(void);
 	void Joystick_SetValues(joystick_t joystick);
